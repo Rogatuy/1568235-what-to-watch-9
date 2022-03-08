@@ -1,9 +1,16 @@
-import Footer from '../footer/footer';
-import Header from '../header/header';
+import Footer from '../../components/footer/footer';
+import Logo from '../../components/logo/logo';
 
 function SignIn() {
   return (
-    <><Header />
+    <div className="user-page">
+      <header className="page-header user-page__head">
+        <div className="logo">
+          <Logo />
+        </div>
+
+        <h1 className="page-title user-page__title">Sign in</h1>
+      </header>
       <div className="sign-in user-page__content">
         <form action="#" className="sign-in__form">
           <div className="sign-in__fields">
@@ -20,8 +27,9 @@ function SignIn() {
             <button className="sign-in__btn" type="submit">Sign in</button>
           </div>
         </form>
-      </div><Footer />
-    </>
+      </div>
+      <Footer />
+    </div>
   );
 }
 
