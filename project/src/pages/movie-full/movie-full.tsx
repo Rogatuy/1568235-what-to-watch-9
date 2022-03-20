@@ -1,11 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
-// import { AppRoute } from '../../const';
 import { Movies } from '../../types/Movie';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { AppRoute } from '../../const';
+import Tabs from '../../components/tabs/tabs';
 
 type MovieFullProps = {
   films: Movies;
@@ -78,35 +78,7 @@ function MovieFull ({films}: MovieFullProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="/#" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/#" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/#" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{movie.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{movie.scoresCount} ratings</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{movie.description}</p>
-
-                <p className="film-card__director"><strong>Director: {movie.director}</strong></p>
-
-                <p className="film-card__starring"><strong>Starring: {movie.starring.join(', ')}</strong></p>
-              </div>
+              <Tabs film={movie}/>
             </div>
           </div>
         </div>
@@ -114,7 +86,7 @@ function MovieFull ({films}: MovieFullProps): JSX.Element {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <FilmsList films={films.slice(0, 4)}/>
+          <FilmsList films={films.filter((film) => film.genre === movie.genre).slice(0, 4)}/>
         </section>
 
         <Footer />

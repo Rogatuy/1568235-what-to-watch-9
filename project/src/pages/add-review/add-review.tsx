@@ -6,7 +6,6 @@ import UserNavigation from '../../components/user-navigation/user-navigation';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
-
 type AddReviewProps = {
   films: Movies;
 }
@@ -14,6 +13,7 @@ type AddReviewProps = {
 function AddReview({films}: AddReviewProps): JSX.Element {
   const {id} = useParams();
   const movie = films.find((film) => film.id === Number(id));
+
   if(!movie) {
     return <NotFoundScreen />;
   }

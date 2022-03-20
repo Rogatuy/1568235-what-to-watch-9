@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { Movies } from '../../types/Movie';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
-
 type PlayerProps = {
   films: Movies;
 }
@@ -10,6 +9,7 @@ type PlayerProps = {
 function Player({films}: PlayerProps): JSX.Element  {
   const {id} = useParams();
   const movie = films.find((film) => film.id === Number(id));
+
   if(!movie) {
     return <NotFoundScreen />;
   }

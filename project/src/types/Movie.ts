@@ -1,3 +1,5 @@
+import { Comments } from './comments';
+
 export type Movie = {
   id: number,
   name: string,
@@ -16,6 +18,7 @@ export type Movie = {
   genre: string,
   released: number,
   isFavorite: boolean,
+  review: Comments
 };
 
 
