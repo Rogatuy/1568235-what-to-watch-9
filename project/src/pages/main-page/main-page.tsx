@@ -1,16 +1,40 @@
-import CardMovie from '../card-movie/card-movie';
-import { MainPageMovie } from '../../types/MainPaigMovie';
-import movies from '../../state/movies';
-import Header from '../header/header';
-import Footer from '../footer/footer';
+import { films } from '../../mocks/films';
+import Footer from '../../components/footer/footer';
+import Logo from '../../components/logo/logo';
+import { Link } from 'react-router-dom';
+import FilmsList from '../../components/films-list/films-list';
 
+type MainProps = {
+  name: string;
+  genre: string;
+  released: number;
+}
 
-function MainPage({title, genre, releaseDate}: MainPageMovie): JSX.Element {
+function MainPage({name, genre, released}: MainProps): JSX.Element {
   return (
     <>
       <section className="film-card">
 
-        <Header />
+        <div className="film-card__bg">
+          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+        </div>
+
+        <h1 className="visually-hidden">WTW</h1>
+
+        <header className="page-header film-card__head">
+          <Logo />
+
+          <ul className="user-block">
+            <li className="user-block__item">
+              <div className="user-block__avatar">
+                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              </div>
+            </li>
+            <li className="user-block__item">
+              <Link className="user-block__link" to="/">Sign out</Link>
+            </li>
+          </ul>
+        </header>
 
         <div className="film-card__wrap">
           <div className="film-card__info">
@@ -19,10 +43,10 @@ function MainPage({title, genre, releaseDate}: MainPageMovie): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{releaseDate}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -80,15 +104,7 @@ function MainPage({title, genre, releaseDate}: MainPageMovie): JSX.Element {
               <a href="/#" className="catalog__genres-link">Thrillers</a>
             </li>
           </ul>
-          <div className="catalog__films-list">
-            {
-              movies.map((movie) => (
-                <CardMovie
-                  key={`movie${movie.id}`}
-                  {...movie}
-                /> ))
-            }
-          </div>
+          <FilmsList films={films}/>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
