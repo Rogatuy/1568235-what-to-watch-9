@@ -27,6 +27,7 @@ function CardMovie({film}: CardMovieProps): JSX.Element {
     }
   };
 
+
   return (
     <article
       className="small-film-card catalog__films-card"
