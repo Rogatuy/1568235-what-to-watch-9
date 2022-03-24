@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
 import ListOfGenre from '../../components/list-of-genre/list-of-genre';
 
+
 type MainProps = {
   name: string;
   genre: string;
@@ -75,9 +76,6 @@ function MainPage({name, genre, released}: MainProps): JSX.Element {
 
           <ListOfGenre films={films} />
           <FilmsList films={films} />
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <Footer />

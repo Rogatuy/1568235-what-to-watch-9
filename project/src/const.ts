@@ -20,3 +20,5 @@ export enum ratingToText {
 }
 
 export const ALL_GENRES = 'All genres';
+
+export const FILMS_STEP = 8;
