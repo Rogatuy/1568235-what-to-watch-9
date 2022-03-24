@@ -13,19 +13,21 @@ function ListOfGenre({films}: ListOfGenreProps): JSX.Element {
   const genre = useAppSelector((state) => state.genre);
   const dispatch = useAppDispatch();
 
+
   const genres = films.map((film) => film.genre);
-  genres.unshift(ALL_GENRES);
-  const allGenres = [...new Set(genres)];
+  const allGenres = [ALL_GENRES, ...genres];
+
+  const allGenresSet = [...new Set(allGenres)];
 
   return (
     <ul className="catalog__genres-list">
-      {allGenres.map((genreItem) => (
+      {allGenresSet.map((genreItem) => (
         <li
           key={genreItem}
           className={classNames('catalog__genres-item', {
             'catalog__genres-item--active': genreItem === genre,
           })}
-          onClick={() => dispatch(changeGenre())}
+          onClick={() => dispatch(changeGenre(genreItem))}
         >
           <Link to="#" className="catalog__genres-link">{genreItem}</Link>
         </li>
