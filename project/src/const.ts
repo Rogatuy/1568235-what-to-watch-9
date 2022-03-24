@@ -18,3 +18,5 @@ export enum ratingToText {
   Good = 8,
   Awesome = 10,
 }
+
+export const ALL_GENRES = 'All genres';
