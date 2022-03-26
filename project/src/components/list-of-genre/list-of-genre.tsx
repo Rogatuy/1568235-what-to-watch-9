@@ -36,4 +36,5 @@ function ListOfGenre({films}: ListOfGenreProps): JSX.Element {
   );
 }
 
+
 export default ListOfGenre;
