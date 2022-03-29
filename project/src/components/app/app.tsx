@@ -1,61 +1,63 @@
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import MainPage from '../../pages/main-page/main-page';
-import {AppRoute,  AuthorizationStatus} from '../../const';
+import {AppRoute} from '../../const';
 import MyList from '../../pages/my-list/my-list';
 import SignIn from '../../pages/sign-in/sign-in';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PrivateRoute from '../private-route/private-route';
 import MovieFull from '../../pages/movie-full/movie-full';
 import Player from '../../pages/player/player';
-import { Movies } from '../../types/Movie';
 import AddReview from '../../pages/add-review/add-review';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { isCheckedAuth } from '../../utils';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
-type AppScreenProps = {
-  name: string,
-  genre: string,
-  released: number,
-  films: Movies;
-}
+function App(): JSX.Element {
+  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
 
-function App({name, genre, released, films}: AppScreenProps): JSX.Element {
+  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={
-            <MainPage name={name} genre={genre} released={released}/>
-          }
-        />
-        <Route
-          path={AppRoute.MyList}
-          element={
-            <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth}
-            >
-              <MyList films={films}/>
-            </PrivateRoute>
-          }
+          element={<MainPage />}
         />
         <Route
           path={AppRoute.Login}
           element={<SignIn/>}
         />
+        <Route
+          path={AppRoute.MyList}
+          element={
+            <PrivateRoute>
+              <MyList />
+            </PrivateRoute>
+          }
+        />
+
         <Route path={AppRoute.Film}>
-          <Route index element={<MovieFull films={films}/>} />
-          <Route path=':id' element={<MovieFull films={films}/>} />
-          <Route path=':id/review' element={<AddReview films={films}/>} />
+          <Route index element={<MovieFull/>} />
+          <Route path=':id' element={<MovieFull />} />
+          <Route path=':id/review' element={<AddReview />} />
         </Route>
         <Route path={AppRoute.Player}>
-          <Route index element={<Player films={films}/>} />
-          <Route path=':id' element={<Player films={films}/>} />
+          <Route index element={<Player />} />
+          <Route path=':id' element={<Player />} />
         </Route>
         <Route
           path="*"
           element={<NotFoundScreen />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

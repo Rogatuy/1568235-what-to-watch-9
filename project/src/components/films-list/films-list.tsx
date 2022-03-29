@@ -1,14 +1,16 @@
 import CardMovie from '../card-movie/card-movie';
-import {Movies} from '../../types/Movie';
+import { Movies } from '../../types/Movie';
 import { useAppSelector } from '../../hooks';
 import { ALL_GENRES, FILMS_STEP } from '../../const';
 import ShowMoreButton from '../show-more-button/show-more-button';
+import { useState } from 'react';
 
 type FilmsListProps = {
   films: Movies;
 }
 
 function FilmsList({films}: FilmsListProps): JSX.Element {
+  const [activeId, setActiveId] = useState<number | null>(null);
   const chooseGenre = useAppSelector((state) => state.genre);
   const filmsCount = useAppSelector((state) => state.filmsCount);
   const choosingFilms = chooseGenre === ALL_GENRES
@@ -30,6 +32,8 @@ function FilmsList({films}: FilmsListProps): JSX.Element {
           <CardMovie
             key={film.id}
             film={film}
+            isActive={film.id === activeId}
+            onHover={setActiveId}
           />
         ))}
       </div>

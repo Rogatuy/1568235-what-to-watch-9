@@ -1,25 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-import { films } from './mocks/films';
 import {Provider} from 'react-redux';
 import {store} from './store';
+import {fetchFilmAction, checkAuthAction, fetchPromoFilmAction} from './store/api-actions';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Setting = {
-  TITLE: 'The Grand Budapest Hotel',
-  GENRE: 'Drama',
-  RELEASE_DATE: 2014,
-};
+store.dispatch(fetchFilmAction());
+store.dispatch(fetchPromoFilmAction());
+store.dispatch(checkAuthAction());
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <App
-        name={Setting.TITLE}
-        genre={Setting.GENRE}
-        released={Setting.RELEASE_DATE}
-        films={films}
-      />
+      <ToastContainer />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

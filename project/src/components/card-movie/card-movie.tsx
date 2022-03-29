@@ -1,42 +1,35 @@
-import { useRef, useState } from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import { Movie } from '../../types/Movie';
 import VideoPlayer from '../video-player/video-player';
-
-const TIMEOUT = 1000;
+import { loadFilmFull } from '../../store/action';
+import { useAppDispatch } from '../../hooks';
 
 type CardMovieProps = {
   film: Movie;
+  isActive: boolean
+  onHover: (id: number | null) => void,
 }
 
-function CardMovie({film}: CardMovieProps): JSX.Element {
-  const [isActive, setIsActive] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const handleFilmActive = () => {
-    timerRef.current = setTimeout(() => {
-      setIsActive(true);
-    }, TIMEOUT);
-  };
-
-  const handleFilmInactive = () => {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      setIsActive(false);
-    }
-  };
-
+function CardMovie({film, isActive, onHover}: CardMovieProps): JSX.Element {
+  const {id} = film;
+  const dispatch = useAppDispatch();
 
   return (
     <article
       className="small-film-card catalog__films-card"
-      onMouseEnter={handleFilmActive}
-      onMouseLeave={handleFilmInactive}
+      onMouseOver={() => onHover(id)}
+      onMouseOut={() => onHover(null)}
+      onClick={() => dispatch(loadFilmFull(film))}
     >
       <Link to={`${AppRoute.Film}${film.id}`}>
         <div className="small-film-card__image">
-          <VideoPlayer film={film} isPlaying={isActive} />
+          <VideoPlayer
+            film={film}
+            isPlaying={isActive}
+            poster={film.previewImage}
+            src={film.previewVideoLink}
+          />
         </div>
       </Link>
       <h3 className="small-film-card__title">

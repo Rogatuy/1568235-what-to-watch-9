@@ -1,21 +1,17 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { Movies } from '../../types/Movie';
 import Logo from '../../components/logo/logo';
 import UserNavigation from '../../components/user-navigation/user-navigation';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
+import { useAppSelector } from '../../hooks';
 
-type AddReviewProps = {
-  films: Movies;
-}
-
-function AddReview({films}: AddReviewProps): JSX.Element {
+function AddReview(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
   const {id} = useParams();
   const movie = films.find((film) => film.id === Number(id));
 
   if(!movie) {
-    return <NotFoundScreen />;
+    return <Navigate to={AppRoute.Main} />;
   }
 
   return (

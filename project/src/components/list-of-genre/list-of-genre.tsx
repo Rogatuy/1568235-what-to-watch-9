@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeGenre } from '../../store/action';
 import { Movies } from '../../types/Movie';
 import classNames from 'classnames';
-import { ALL_GENRES } from '../../const';
+import { ALL_GENRES, MAX_GENRES } from '../../const';
 
 type ListOfGenreProps = {
   films: Movies;
@@ -21,7 +21,7 @@ function ListOfGenre({films}: ListOfGenreProps): JSX.Element {
 
   return (
     <ul className="catalog__genres-list">
-      {allGenresSet.map((genreItem) => (
+      {allGenresSet.slice(0, MAX_GENRES).map((genreItem) => (
         <li
           key={genreItem}
           className={classNames('catalog__genres-item', {

@@ -1,22 +1,19 @@
-import { useParams, Link } from 'react-router-dom';
-import { Movies } from '../../types/Movie';
+import { Link, Navigate } from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
-import Logo from '../../components/logo/logo';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import Tabs from '../../components/tabs/tabs';
+import { useAppSelector } from '../../hooks';
+import Header from '../../components/header/header';
 
-type MovieFullProps = {
-  films: Movies;
-}
 
-function MovieFull ({films}: MovieFullProps): JSX.Element {
-  const {id} = useParams();
-  const movie = films.find((film) => film.id === Number(id));
+function MovieFull (): JSX.Element {
+  const films = useAppSelector((state) => state.films);
+  const movie = useAppSelector((state) => state.filmFull);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   if (!movie) {
-    return <NotFoundScreen />;
+    return <Navigate to={AppRoute.Main} />;
   }
 
   return (
@@ -29,20 +26,7 @@ function MovieFull ({films}: MovieFullProps): JSX.Element {
 
           <h1 className="visually-hidden">WTW</h1>
 
-          <header className="page-header film-card__head">
-            <Logo />
-
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <Link className="user-block__link" to="/">Sign out</Link>
-              </li>
-            </ul>
-          </header>
+          <Header />
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -65,7 +49,9 @@ function MovieFull ({films}: MovieFullProps): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`${AppRoute.Film}${movie.id}/review`} className="btn film-card__button">Add review</Link>
+                {authorizationStatus === AuthorizationStatus.Auth
+                  ? <Link to={`${AppRoute.Film}${movie.id}/review`} className="btn film-card__button">Add review</Link>
+                  : ''}
               </div>
             </div>
           </div>
