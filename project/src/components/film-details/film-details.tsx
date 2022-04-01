@@ -1,13 +1,14 @@
-import { Movie } from '../../types/Movie';
+import { Movie } from '../../types/movie';
+import { MINUTE_IN_HOURS } from '../../utils';
 
 type FilmDetailsProps = {
   film: Movie;
 }
 
 const convertRunTime = (runtime: number) => {
-  const convertTime = runtime < 60
+  const convertTime = runtime < MINUTE_IN_HOURS
     ? `${runtime}m`
-    : `${Math.floor(runtime/60)}h ${runtime % 60}m`;
+    : `${Math.floor(runtime/MINUTE_IN_HOURS)}h ${runtime % MINUTE_IN_HOURS}m`;
 
   return convertTime;
 };

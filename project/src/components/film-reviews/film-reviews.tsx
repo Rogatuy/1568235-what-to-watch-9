@@ -6,7 +6,7 @@ type FilmReviewsProps = {
 }
 
 function FilmReviews({reviews}: FilmReviewsProps): JSX.Element {
-  const halfIndex = Math.ceil(reviews.length/2);
+  const halfIndex = Math.ceil(reviews.length / 2);
   const reviewsСolumnFirst = reviews.slice(0, halfIndex);
   const reviewsСolumnSecond = reviews.slice(halfIndex, reviews.length);
 

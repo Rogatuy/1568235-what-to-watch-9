@@ -10,3 +10,9 @@ export type Comment = {
 };
 
 export type Comments = Comment[];
+
+export type CommentPost = {
+  comment: string;
+  rating: number;
+  filmId: number;
+};

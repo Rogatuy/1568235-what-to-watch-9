@@ -1,5 +1,5 @@
 import { ratingToText } from '../../const';
-import { Movie } from '../../types/Movie';
+import { Movie } from '../../types/movie';
 
 type FilmOverviewProps = {
   film: Movie;

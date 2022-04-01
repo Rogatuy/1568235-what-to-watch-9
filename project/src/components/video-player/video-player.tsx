@@ -1,12 +1,16 @@
 import { useEffect, useRef} from 'react';
-import { Movie } from '../../types/Movie';
+import { Movie } from '../../types/movie';
+
+const TIMEOUT = 1000;
 
 type VideoPlayerProps = {
   isPlaying: boolean;
   film: Movie;
+  poster: string;
+  src: string;
 }
 
-function VideoPlayer({isPlaying, film}: VideoPlayerProps): JSX.Element {
+function VideoPlayer({isPlaying, film, poster, src}: VideoPlayerProps): JSX.Element {
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -15,22 +19,28 @@ function VideoPlayer({isPlaying, film}: VideoPlayerProps): JSX.Element {
       return;
     }
 
-    if (isPlaying) {
-      videoRef.current.play();
-      return;
+    const currentCardFilm = videoRef.current;
+
+    let timer: ReturnType<typeof setTimeout>;
+
+    if(isPlaying) {
+      timer = setTimeout( () => {
+        currentCardFilm.play();
+      }, TIMEOUT);
     }
 
-    videoRef.current.pause();
-  }, [film.previewImage, isPlaying]);
+    return () => {
+      clearTimeout(timer);
+      currentCardFilm.load();
+    };
+  }, [isPlaying]);
 
   return (
     <video
-      src={film.previewVideoLink}
+      className="player__video"
+      poster={poster}
       ref={videoRef}
-      poster={film.previewImage}
-      width="280"
-      height="175"
-      muted
+      src={src}
     />
   );
 }
