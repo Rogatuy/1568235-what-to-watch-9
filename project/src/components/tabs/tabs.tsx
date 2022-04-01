@@ -1,29 +1,31 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Movie } from '../../types/Movie';
+import { Movie } from '../../types/movie';
 import FilmOverview from '../../components/film-overviews/film-overviews';
 import FilmDetails from '../../components/film-details/film-details';
 import FilmReviews from '../../components/film-reviews/film-reviews';
 import classNames from 'classnames';
+import { Comments } from '../../types/comments';
 
-const getComponentByTab = (targetTab:string, film: Movie) => {
+const getComponentByTab = (targetTab:string, film: Movie, comments: Comments) => {
   switch (targetTab) {
     case 'Overview':
       return <FilmOverview film={film} />;
     case 'Details':
       return <FilmDetails film={film} />;
     case 'Reviews':
-      return <FilmReviews reviews={film.review} />;
+      return <FilmReviews reviews={comments} />;
   }
 };
 
 type TabsProps = {
   film: Movie;
+  comments: Comments;
 }
 
 const TABS = ['Overview', 'Details', 'Reviews'];
 
-function Tabs({film}: TabsProps): JSX.Element {
+function Tabs({film, comments}: TabsProps): JSX.Element {
   const [targetTab, setTargetTab] = useState(TABS[0]);
 
   return (
@@ -43,7 +45,7 @@ function Tabs({film}: TabsProps): JSX.Element {
           ))}
         </ul>
       </nav>
-      {getComponentByTab(targetTab, film)}
+      {getComponentByTab(targetTab, film, comments)}
     </>
   );
 }

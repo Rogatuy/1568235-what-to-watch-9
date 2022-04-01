@@ -1,5 +1,5 @@
 import { useEffect, useRef} from 'react';
-import { Movie } from '../../types/Movie';
+import { Movie } from '../../types/movie';
 
 const TIMEOUT = 1000;
 

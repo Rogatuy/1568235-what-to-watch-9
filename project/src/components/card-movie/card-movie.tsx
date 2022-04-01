@@ -1,9 +1,7 @@
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const';
-import { Movie } from '../../types/Movie';
+import { Movie } from '../../types/movie';
 import VideoPlayer from '../video-player/video-player';
-import { loadFilmFull } from '../../store/action';
-import { useAppDispatch } from '../../hooks';
 
 type CardMovieProps = {
   film: Movie;
@@ -13,14 +11,12 @@ type CardMovieProps = {
 
 function CardMovie({film, isActive, onHover}: CardMovieProps): JSX.Element {
   const {id} = film;
-  const dispatch = useAppDispatch();
 
   return (
     <article
       className="small-film-card catalog__films-card"
       onMouseOver={() => onHover(id)}
       onMouseOut={() => onHover(null)}
-      onClick={() => dispatch(loadFilmFull(film))}
     >
       <Link to={`${AppRoute.Film}${film.id}`}>
         <div className="small-film-card__image">

@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeGenre } from '../../store/action';
-import { Movies } from '../../types/Movie';
+import { Movies } from '../../types/movie';
 import classNames from 'classnames';
 import { ALL_GENRES, MAX_GENRES } from '../../const';
+import { changeGenre } from '../../store/selected-genre/selected-genre';
+import { getSelectedGenre } from '../../store/selected-genre/selectors';
 
 type ListOfGenreProps = {
   films: Movies;
 }
 
 function ListOfGenre({films}: ListOfGenreProps): JSX.Element {
-  const genre = useAppSelector((state) => state.genre);
+  const genre = useAppSelector(getSelectedGenre);
   const dispatch = useAppDispatch();
 
 

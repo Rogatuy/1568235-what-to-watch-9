@@ -1,16 +1,11 @@
-import { useAppDispatch } from '../../hooks';
-import { showMoreClick } from '../../store/action';
-// import { Movies } from '../../types/Movie';
+type ShowMoreButtonProps = {
+  handleButtonClick: () => void;
+}
 
-// type showMoreButtonProps = {
-//   films: Movies;
-// }
-
-function ShowMoreButton(): JSX.Element {
-  const dispatch = useAppDispatch();
+function ShowMoreButton({handleButtonClick}: ShowMoreButtonProps): JSX.Element {
   return (
     <div className="catalog__more">
-      <button className="catalog__button" type="button" onClick={() => dispatch(showMoreClick())}>Show more</button>
+      <button className="catalog__button" type="button" onClick={handleButtonClick}>Show more</button>
     </div>);
 }
 

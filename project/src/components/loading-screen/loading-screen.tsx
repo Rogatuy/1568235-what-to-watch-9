@@ -1,6 +1,11 @@
+import styles from './loading-screen.module.css';
+
 function LoadingScreen(): JSX.Element {
   return (
-    <p>Loading ...</p>
+    <div className={styles.container}>
+      <p>Loading ...</p>
+      <div className={styles.dualRing} ></div>
+    </div>
   );
 }
 

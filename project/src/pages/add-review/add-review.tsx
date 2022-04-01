@@ -1,17 +1,21 @@
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Logo from '../../components/logo/logo';
 import UserNavigation from '../../components/user-navigation/user-navigation';
-import AddReviewForm from '../../components/add-review-form/add-review-form';
+import AddCommentForm from '../../components/add-review-form/add-review-form';
 import { useAppSelector } from '../../hooks';
+import { getFilmsList } from '../../store/films-data/selectors';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 function AddReview(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  const films = useAppSelector(getFilmsList);
   const {id} = useParams();
   const movie = films.find((film) => film.id === Number(id));
 
   if(!movie) {
-    return <Navigate to={AppRoute.Main} />;
+    return (
+      <LoadingScreen />
+    );
   }
 
   return (
@@ -46,7 +50,7 @@ function AddReview(): JSX.Element {
       </div>
 
       <div className="add-review">
-        <AddReviewForm />
+        <AddCommentForm />
       </div>
 
     </section>
