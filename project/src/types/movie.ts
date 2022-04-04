@@ -18,7 +18,6 @@ export type Movie = {
   isFavorite: boolean,
 };
 
-
 export type Movies = Movie[];
 
 export type addFilmToFavorite = {
