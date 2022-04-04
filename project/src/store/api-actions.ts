@@ -5,7 +5,7 @@ import {addFilmToFavorite, Movie, Movies} from '../types/movie';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
 import {AuthData} from '../types/auth-data';
-import {userCommentData, UserData} from '../types/user-data';
+import {UserCommentData, UserData} from '../types/user-data';
 import { errorHandle } from '../services/error-handle';
 import { CommentPost, Comments/*, CommentPost*/ } from '../types/comments';
 import { loadFilms } from './films-data/films-data';
@@ -111,7 +111,7 @@ export const addFavoriteFilm = createAsyncThunk(
   'data/addFavoriteFilms',
   async ({id, status}: addFilmToFavorite) => {
     try {
-      await api.post<userCommentData>(`${APIRoute.Favorite}/${id}/${status}`, {id, status});
+      await api.post<UserCommentData>(`${APIRoute.Favorite}/${id}/${status}`, {id, status});
       store.dispatch(fetchMyListAction());
     } catch (error) {
       errorHandle(error);

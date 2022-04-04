@@ -7,7 +7,7 @@ const initialState: ReviewSendStatusData = {
 };
 
 export const reviewSendStatusData = createSlice({
-  name: NameSpace.reviewSendStatus,
+  name: NameSpace.ReviewSendStatus,
   initialState,
   reducers: {
     reviewSendStatus: (state, action) => {

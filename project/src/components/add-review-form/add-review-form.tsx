@@ -1,3 +1,5 @@
+import  './add-review-form.css';
+
 import {FormEvent, useCallback, useEffect, useRef, useState} from 'react';
 import { getReviewSendStatus } from '../../store/review-send-status/selectors';
 import StarsRating from '../stars-raiting/stars-raiting';
@@ -65,6 +67,7 @@ function AddCommentForm(): JSX.Element {
             <StarsRating
               key={i + 1}
               item={i + 1}
+              isSending={isSending}
               onRatingChange={handleRatingChange}
             />
           )).reverse()}

@@ -7,7 +7,7 @@ const initialState: FavoriteFilmsData = {
 };
 
 export const favoriteFilmsData = createSlice({
-  name: NameSpace.myList,
+  name: NameSpace.MyList,
   initialState,
   reducers: {
     loadMyList: (state, action) => {

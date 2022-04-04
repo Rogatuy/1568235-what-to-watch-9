@@ -15,11 +15,14 @@ import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import { getFilmsLoadedDataStatus } from '../../store/films-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getPromoFiilmLoadedDataStatus } from '../../store/promo-film-data/selectors';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const isDataLoaded = useAppSelector(getFilmsLoadedDataStatus);
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded ) {
+  const isFilmsLoaded = useAppSelector(getFilmsLoadedDataStatus);
+  const isPromoLoaded = useAppSelector(getPromoFiilmLoadedDataStatus);
+
+  if (isCheckedAuth(authorizationStatus) || !isFilmsLoaded || !isPromoLoaded ) {
     return (
       <LoadingScreen />
     );

@@ -4,19 +4,6 @@ import { CommentPost, Comments } from './comments.js';
 import { Movie, Movies } from './movie.js';
 import { ReviewSendStatus, UserLoginData } from './user-data.js';
 
-// export type State = {
-//   genre: string;
-//   films: Movies;
-//   promoFilm:  Movie | null;
-//   isDataLoaded: boolean;
-//   isFilmLoaded: boolean;
-//   authorizationStatus: AuthorizationStatus;
-//   filmFull: Movie | null;
-//   similarFilms: Movies;
-//   comments: Comments;
-//   myList: Movies;
-// };
-
 export type AppDispatch = typeof store.dispatch;
 
 export type CommentsData = {

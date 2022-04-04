@@ -13,7 +13,7 @@ const initialState: UserData = {
 };
 
 export const getUserData = createSlice({
-  name: NameSpace.userData,
+  name: NameSpace.UserData,
   initialState,
   reducers: {
     userData: (state, action) => {

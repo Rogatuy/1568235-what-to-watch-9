@@ -13,15 +13,15 @@ import { getUserData } from './user-data/user-data';
 import { userProcess } from './user-process/user-process';
 
 export const rootReducer = combineReducers({
-  [NameSpace.user]: userProcess.reducer,
-  [NameSpace.selectedGenre]: selectedGenre.reducer,
-  [NameSpace.filmsData]: filmsData.reducer,
-  [NameSpace.commentsData]: commentsData.reducer,
-  [NameSpace.promoFilmData]: promoFilmData.reducer,
-  [NameSpace.similarFilmsData]: similarFilmsData.reducer,
-  [NameSpace.postUserReview]: postCommentData.reducer,
-  [NameSpace.userData]: getUserData.reducer,
-  [NameSpace.reviewSendStatus]: reviewSendStatusData.reducer,
-  [NameSpace.myList]: favoriteFilmsData.reducer,
-  [NameSpace.filmFullData]: filmFullData.reducer,
+  [NameSpace.User]: userProcess.reducer,
+  [NameSpace.SelectedGenre]: selectedGenre.reducer,
+  [NameSpace.FilmsData]: filmsData.reducer,
+  [NameSpace.CommentsData]: commentsData.reducer,
+  [NameSpace.PromoFilmData]: promoFilmData.reducer,
+  [NameSpace.SimilarFilmsData]: similarFilmsData.reducer,
+  [NameSpace.PostUserReview]: postCommentData.reducer,
+  [NameSpace.UserData]: getUserData.reducer,
+  [NameSpace.ReviewSendStatus]: reviewSendStatusData.reducer,
+  [NameSpace.MyList]: favoriteFilmsData.reducer,
+  [NameSpace.FilmFullData]: filmFullData.reducer,
 });

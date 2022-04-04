@@ -1,9 +1,10 @@
 type StarsRatingProps = {
   item: number;
   onRatingChange: (item: number) => void;
+  isSending: boolean;
 }
 
-function StarsRating({item, onRatingChange}: StarsRatingProps): JSX.Element {
+function StarsRating({item, onRatingChange, isSending}: StarsRatingProps): JSX.Element {
   return (
     <>
       <input
@@ -12,6 +13,7 @@ function StarsRating({item, onRatingChange}: StarsRatingProps): JSX.Element {
         type="radio"
         name="rating"
         value={item}
+        disabled={isSending}
         onChange={() => onRatingChange(item)}
       />
       <label className="rating__label" htmlFor={`star-${item}`}>

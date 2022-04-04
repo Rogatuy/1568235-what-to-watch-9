@@ -7,7 +7,7 @@ const initialState: SelectedGenre = {
 };
 
 export const selectedGenre = createSlice({
-  name: NameSpace.selectedGenre,
+  name: NameSpace.SelectedGenre,
   initialState,
   reducers: {
     changeGenre: (state, action) => {

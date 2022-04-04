@@ -3,5 +3,5 @@ import { Movies } from '../../types/movie';
 import { State } from '../../types/state';
 
 
-export const getFavoriteFilmsList = (state: State): Movies => state[NameSpace.myList].myList;
+export const getFavoriteFilmsList = (state: State): Movies => state[NameSpace.MyList].myList;
 

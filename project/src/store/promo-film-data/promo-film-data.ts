@@ -26,7 +26,7 @@ const initialState: PromoFilmData = {
 };
 
 export const promoFilmData = createSlice({
-  name: NameSpace.promoFilmData,
+  name: NameSpace.PromoFilmData,
   initialState,
   reducers: {
     loadPromoFilm: (state, action) => {

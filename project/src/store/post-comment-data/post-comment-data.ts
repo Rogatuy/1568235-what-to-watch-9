@@ -11,7 +11,7 @@ const initialState: PostUserReview = {
 };
 
 export const postCommentData = createSlice({
-  name: NameSpace.postUserReview,
+  name: NameSpace.PostUserReview,
   initialState,
   reducers: {
     postUserReview: (state, action) => {

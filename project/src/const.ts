@@ -40,22 +40,22 @@ export enum APIRoute {
   Logout = '/logout',
 }
 
-export enum HTTP_CODE {
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
+export enum HttpCode {
+  BadRequest = 400,
+  Unauthorized = 401,
   NOT_FOUND = 404,
 }
 
 export enum NameSpace {
-  filmsData = 'FILMS_DATA',
-  commentsData = 'COMMENTS_DATA',
-  promoFilmData = 'PROMO_FILM_DATA',
-  similarFilmsData = 'SIMILAR_FILMS_DATA',
-  myList  = 'MY_LIST',
-  postUserReview = 'POST_USER_REVIEW',
-  reviewSendStatus = 'REVIEW_SEND_STATUS',
-  selectedGenre = 'SELECTED_GENRE',
-  user = 'USER',
-  userData = 'USER_DATA',
-  filmFullData = 'FILM_FULL_DATA',
+  FilmsData = 'FILMS_DATA',
+  CommentsData = 'COMMENTS_DATA',
+  PromoFilmData = 'PROMO_FILM_DATA',
+  SimilarFilmsData = 'SIMILAR_FILMS_DATA',
+  MyList  = 'MY_LIST',
+  PostUserReview = 'POST_USER_REVIEW',
+  ReviewSendStatus = 'REVIEW_SEND_STATUS',
+  SelectedGenre = 'SELECTED_GENRE',
+  User = 'USER',
+  UserData = 'USER_DATA',
+  FilmFullData = 'FILM_FULL_DATA',
 }

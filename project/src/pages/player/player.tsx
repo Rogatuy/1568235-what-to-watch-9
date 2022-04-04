@@ -77,7 +77,7 @@ function Player(): JSX.Element  {
             </progress>
             <div className="player__toggler" style ={{left: `${getPercent(dataFilm.runTime, currentTime)}%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">{getTime(dataFilm.runTime, currentTime)}</div>
+          <div className="player__time-value">-{getTime(dataFilm.runTime, currentTime)}</div>
         </div>
 
         <div className="player__controls-row">
@@ -91,7 +91,7 @@ function Player(): JSX.Element  {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{dataFilm.name}</div>
 
           <button
             type="button"
