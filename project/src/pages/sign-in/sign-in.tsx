@@ -1,14 +1,17 @@
 import { FormEvent, useRef } from 'react';
+import { Navigate } from 'react-router-dom';
 import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
-import { useAppDispatch } from '../../hooks';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { AuthData } from '../../types/auth-data';
 
 function SignIn() {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
 
   const onSubmit = (authData: AuthData) => {
@@ -25,6 +28,10 @@ function SignIn() {
       });
     }
   };
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={AppRoute.Main} />;
+  }
 
   return (
     <div className="user-page">

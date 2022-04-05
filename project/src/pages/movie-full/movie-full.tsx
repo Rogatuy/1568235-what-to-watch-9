@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import FilmsList from '../../components/films-list/films-list';
 import Footer from '../../components/footer/footer';
 import { AppRoute, AuthorizationStatus, MAX_SIMILAR_FILMS } from '../../const';
@@ -23,9 +23,10 @@ function MovieFull (): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const filmFull = useAppSelector(getFilmFull);
   const isDataLoadedFilmFull = useAppSelector(getFilmFullLoadedDataStatus);
-
   const {id} = useParams();
   const filmId = Number(id);
+  const navigate = useNavigate();
+  const TIMEOUT_ERROR = 10000;
 
   const dispatch = useAppDispatch();
 
@@ -36,6 +37,12 @@ function MovieFull (): JSX.Element {
       dispatch(fetchCommentsAction(filmId));
     }
   }, [filmId, dispatch, filmFull]);
+
+  useEffect(() => {
+    setTimeout(() =>
+    {if (!isDataLoadedSimilarList || !isDataLoadedCommentsList || !isDataLoadedFilmFull) {
+      navigate(`${AppRoute.NoFoundScreen}`);
+    }}, TIMEOUT_ERROR);}, [id, isDataLoadedCommentsList, isDataLoadedFilmFull, isDataLoadedSimilarList, navigate]);
 
   if (!isDataLoadedSimilarList || !isDataLoadedCommentsList || !isDataLoadedFilmFull) {
     return (

@@ -4,6 +4,7 @@ export enum AppRoute {
   MyList = '/mylist',
   Film = '/films/',
   Player = '/player/',
+  NoFoundScreen = '/*'
 }
 
 export enum AuthorizationStatus {
@@ -58,4 +59,5 @@ export enum NameSpace {
   User = 'USER',
   UserData = 'USER_DATA',
   FilmFullData = 'FILM_FULL_DATA',
+  ServerStatus = 'SERVER_STATUS',
 }

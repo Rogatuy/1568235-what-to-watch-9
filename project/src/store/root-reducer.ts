@@ -8,6 +8,7 @@ import { postCommentData } from './post-comment-data/post-comment-data';
 import { promoFilmData } from './promo-film-data/promo-film-data';
 import { reviewSendStatusData } from './review-send-status/review-send-status';
 import { selectedGenre } from './selected-genre/selected-genre';
+import { serverStatusData } from './server-status/server-status';
 import { similarFilmsData } from './similar-films-data/similar-films-data';
 import { getUserData } from './user-data/user-data';
 import { userProcess } from './user-process/user-process';
@@ -24,4 +25,5 @@ export const rootReducer = combineReducers({
   [NameSpace.ReviewSendStatus]: reviewSendStatusData.reducer,
   [NameSpace.MyList]: favoriteFilmsData.reducer,
   [NameSpace.FilmFullData]: filmFullData.reducer,
+  [NameSpace.ServerStatus]: serverStatusData.reducer,
 });

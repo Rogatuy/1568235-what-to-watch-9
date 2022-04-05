@@ -7,13 +7,13 @@ type FilmReviewsProps = {
 
 function FilmReviews({reviews}: FilmReviewsProps): JSX.Element {
   const halfIndex = Math.ceil(reviews.length / 2);
-  const reviewsСolumnFirst = reviews.slice(0, halfIndex);
-  const reviewsСolumnSecond = reviews.slice(halfIndex, reviews.length);
+  const reviewsColumnFirst = reviews.slice(0, halfIndex);
+  const reviewsColumnSecond = reviews.slice(halfIndex, reviews.length);
 
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviewsСolumnFirst.map((review) => (
+        {reviewsColumnFirst.map((review) => (
           <Review
             key = {review.user.id}
             review = {review}
@@ -21,7 +21,7 @@ function FilmReviews({reviews}: FilmReviewsProps): JSX.Element {
         ))}
       </div>
       <div className="film-card__reviews-col">
-        {reviewsСolumnSecond.map((review) => (
+        {reviewsColumnSecond.map((review) => (
           <Review
             key = {review.user.id}
             review = {review}

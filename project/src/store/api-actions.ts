@@ -7,7 +7,7 @@ import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
 import {AuthData} from '../types/auth-data';
 import {UserCommentData, UserData} from '../types/user-data';
 import { errorHandle } from '../services/error-handle';
-import { CommentPost, Comments/*, CommentPost*/ } from '../types/comments';
+import { CommentPost, Comments} from '../types/comments';
 import { loadFilms } from './films-data/films-data';
 import { loadPromoFilm } from './promo-film-data/promo-film-data';
 import { loadSimilarFilms } from './similar-films-data/similar-films-data';

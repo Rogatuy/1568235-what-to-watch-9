@@ -16,11 +16,20 @@ import browserHistory from '../../browser-history';
 import { getFilmsLoadedDataStatus } from '../../store/films-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getPromoFiilmLoadedDataStatus } from '../../store/promo-film-data/selectors';
+import { getServerStatus } from '../../store/server-status/selectors';
+import ServerErorMessage from '../server-error-message/server-error-message';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isFilmsLoaded = useAppSelector(getFilmsLoadedDataStatus);
   const isPromoLoaded = useAppSelector(getPromoFiilmLoadedDataStatus);
+  const serverDataLoadingSattus = useAppSelector(getServerStatus);
+
+  if (!serverDataLoadingSattus) {
+    return (
+      <ServerErorMessage />
+    );
+  }
 
   if (isCheckedAuth(authorizationStatus) || !isFilmsLoaded || !isPromoLoaded ) {
     return (

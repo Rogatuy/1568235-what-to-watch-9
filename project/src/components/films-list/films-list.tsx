@@ -34,7 +34,8 @@ function FilmsList({films}: FilmsListProps): JSX.Element {
           />
         ))}
       </div>
-      {choosingFilms.length > filmsCount ? <ShowMoreButton handleButtonClick={handleButtonClick} /> : ''}
+      {choosingFilms.length > filmsCount &&
+        <ShowMoreButton handleButtonClick={handleButtonClick}/>}
     </>
   );
 }

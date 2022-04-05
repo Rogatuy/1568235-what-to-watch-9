@@ -3,10 +3,9 @@ import  './add-review-form.css';
 import {FormEvent, useCallback, useEffect, useRef, useState} from 'react';
 import { getReviewSendStatus } from '../../store/review-send-status/selectors';
 import StarsRating from '../stars-raiting/stars-raiting';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { reviewSendStatus } from '../../store/review-send-status/review-send-status';
-import { store } from '../../store';
 import { AppRoute, RATING_LENGTH, REVIEW_LENGTH_MAX, REVIEW_LENGTH_MIN } from '../../const';
 import { addComment, fetchCommentsAction } from '../../store/api-actions';
 
@@ -18,11 +17,12 @@ function AddCommentForm(): JSX.Element {
   const textarea = useRef<HTMLTextAreaElement>(null);
   const sendStatus = useAppSelector(getReviewSendStatus);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const {id} = useParams();
   const filmId = Number(id);
   useEffect (() => () => {
-    store.dispatch(reviewSendStatus('initial'));
-  }, []);
+    dispatch(reviewSendStatus('initial'));
+  }, [dispatch]);
 
   const handleRatingChange = (rating: number) => {
     setStarRating(rating);
@@ -39,11 +39,11 @@ function AddCommentForm(): JSX.Element {
 
   useEffect (() => {
     if (isSending && sendStatus === 'initial') {
-      store.dispatch(fetchCommentsAction(filmId));
+      dispatch(fetchCommentsAction(filmId));
       navigate(`${AppRoute.Film}${id}`);
     }
     setIsSending(sendStatus === 'sending');
-  }, [filmId, id, isSending, navigate, sendStatus]);
+  }, [dispatch, filmId, id, isSending, navigate, sendStatus]);
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -51,7 +51,7 @@ function AddCommentForm(): JSX.Element {
     if (!isDisabled) {
       const comment  = textarea.current?.value || '';
       setCommentData(comment);
-      store.dispatch(addComment({filmId, comment, rating: starRating}));
+      dispatch(addComment({filmId, comment, rating: starRating}));
     }
   };
 
