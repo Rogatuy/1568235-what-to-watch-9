@@ -11,8 +11,8 @@ import { getCommentsList, getCommentsLoadedDataStatus } from '../../store/commen
 import { getSimilarLoadedDataStatus, getSumilarFilmsList } from '../../store/similar-films-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getFilmFull, getFilmFullLoadedDataStatus } from '../../store/film-full-data/selectors';
-import LoadingScreen from '../../components/loading-screen/loading-screen';
 import AddToMyListButton from '../../components/add-to-my-list-button/add-to-my-list-button';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 
 function MovieFull (): JSX.Element {
@@ -26,23 +26,19 @@ function MovieFull (): JSX.Element {
   const {id} = useParams();
   const filmId = Number(id);
   const navigate = useNavigate();
-  const TIMEOUT_ERROR = 10000;
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (filmFull === null || filmFull?.id !== filmId) {
-      dispatch(fetchFullFilmAction(filmId));
-      dispatch(fetchSimilarAction(filmId));
-      dispatch(fetchCommentsAction(filmId));
+    if (!filmFull) {
+      navigate(AppRoute.NoFoundScreen);
+      return;
     }
-  }, [filmId, dispatch, filmFull]);
 
-  useEffect(() => {
-    setTimeout(() =>
-    {if (!isDataLoadedSimilarList || !isDataLoadedCommentsList || !isDataLoadedFilmFull) {
-      navigate(`${AppRoute.NoFoundScreen}`);
-    }}, TIMEOUT_ERROR);}, [id, isDataLoadedCommentsList, isDataLoadedFilmFull, isDataLoadedSimilarList, navigate]);
+    dispatch(fetchFullFilmAction(filmId));
+    dispatch(fetchSimilarAction(filmId));
+    dispatch(fetchCommentsAction(filmId));
+  }, [filmId, dispatch, filmFull, navigate]);
 
   if (!isDataLoadedSimilarList || !isDataLoadedCommentsList || !isDataLoadedFilmFull) {
     return (

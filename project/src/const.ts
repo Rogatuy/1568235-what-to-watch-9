@@ -4,7 +4,7 @@ export enum AppRoute {
   MyList = '/mylist',
   Film = '/films/',
   Player = '/player/',
-  NoFoundScreen = '/*'
+  NoFoundScreen = '/*',
 }
 
 export enum AuthorizationStatus {
@@ -39,6 +39,7 @@ export enum APIRoute {
   Comments = '/comments',
   Login = '/login',
   Logout = '/logout',
+  NoFoundScreen = '/*',
 }
 
 export enum HttpCode {
@@ -61,3 +62,7 @@ export enum NameSpace {
   FilmFullData = 'FILM_FULL_DATA',
   ServerStatus = 'SERVER_STATUS',
 }
+
+export const validatePassword = /^(?=.*\d)(?=.*[a-zA-Z]).*/;
+
+export const validateEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|ru|yahoo|yandex|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|ua|in|bz|xxx|tel|place)\b/;

@@ -19,6 +19,8 @@ import { loadFilmFull } from './film-full-data/film-full-data';
 import { userData } from './user-data/user-data';
 import { postUserReview } from './post-comment-data/post-comment-data';
 import { reviewSendStatus } from './review-send-status/review-send-status';
+import { useNavigate } from 'react-router-dom';
+
 
 export const fetchFilmsAction = createAsyncThunk(
   'data/fetchFilms',
@@ -64,6 +66,8 @@ export const fetchFullFilmAction = createAsyncThunk(
       store.dispatch(loadFilmFull(data));
     } catch (error) {
       errorHandle(error);
+      const navigate = useNavigate();
+      navigate(`${APIRoute.NoFoundScreen}`);
     }
   },
 );
