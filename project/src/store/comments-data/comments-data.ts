@@ -15,7 +15,11 @@ export const commentsData = createSlice({
       state.comments = action.payload;
       state.isDataLoaded = true;
     },
+    toggleLoaderComments: (state, {payload}) => {
+      state.isDataLoaded = payload;
+    },
   },
 });
 
 export const {loadComments} = commentsData.actions;
+export const {toggleLoaderComments} = commentsData.actions;

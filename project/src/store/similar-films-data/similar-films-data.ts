@@ -15,7 +15,11 @@ export const similarFilmsData = createSlice({
       state.similarFilms = action.payload;
       state.isDataLoaded = true;
     },
+    toggleLoaderSimilar: (state, {payload}) => {
+      state.isDataLoaded = payload;
+    },
   },
 });
 
 export const {loadSimilarFilms} = similarFilmsData.actions;
+export const {toggleLoaderSimilar} = similarFilmsData.actions;

@@ -30,20 +30,23 @@ function MovieFull (): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!filmFull) {
-      navigate(AppRoute.NoFoundScreen);
-      return;
+
+    if (filmFull.id === 0 || filmFull?.id !== filmId) {
+      dispatch(fetchFullFilmAction(filmId));
+      dispatch(fetchSimilarAction(filmId));
+      dispatch(fetchCommentsAction(filmId));
+    }}, [filmId, dispatch, filmFull, navigate]);
+
+  if (filmFull.id === 0)  {
+    if ( !isDataLoadedFilmFull || !isDataLoadedSimilarList || !isDataLoadedCommentsList) {
+      return (
+        <LoadingScreen />
+      );
     }
+  }
 
-    dispatch(fetchFullFilmAction(filmId));
-    dispatch(fetchSimilarAction(filmId));
-    dispatch(fetchCommentsAction(filmId));
-  }, [filmId, dispatch, filmFull, navigate]);
-
-  if (!isDataLoadedSimilarList || !isDataLoadedCommentsList || !isDataLoadedFilmFull) {
-    return (
-      <LoadingScreen />
-    );
+  if (filmFull.id === 0 && isDataLoadedFilmFull && isDataLoadedSimilarList && isDataLoadedCommentsList) {
+    navigate(AppRoute.NoFoundScreen);
   }
 
   return (
@@ -105,5 +108,6 @@ function MovieFull (): JSX.Element {
     </>
   );
 }
+
 
 export default MovieFull;

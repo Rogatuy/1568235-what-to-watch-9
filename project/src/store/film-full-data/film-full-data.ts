@@ -33,7 +33,11 @@ export const filmFullData = createSlice({
       state.filmFull = action.payload;
       state.isDataLoaded = true;
     },
+    toggleLoaderFilmFull: (state, {payload}) => {
+      state.isDataLoaded = payload;
+    },
   },
 });
 
 export const {loadFilmFull} = filmFullData.actions;
+export const {toggleLoaderFilmFull} = filmFullData.actions;

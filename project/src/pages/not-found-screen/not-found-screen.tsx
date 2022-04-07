@@ -8,7 +8,6 @@ function NotFoundScreen() {
     <div className="user-page">
       <header className="page-header user-page__head">
         <Logo />
-        <h1 className="page-title user-page__title">Sign in</h1>
       </header>
       <div className="film-card__wrap">
         <h1> 404. Page not found</h1>

@@ -10,16 +10,15 @@ import { errorHandle } from '../services/error-handle';
 import { CommentPost, Comments} from '../types/comments';
 import { loadFilms } from './films-data/films-data';
 import { loadPromoFilm } from './promo-film-data/promo-film-data';
-import { loadSimilarFilms } from './similar-films-data/similar-films-data';
-import { loadComments } from './comments-data/comments-data';
+import { loadSimilarFilms, toggleLoaderSimilar } from './similar-films-data/similar-films-data';
+import { loadComments, toggleLoaderComments } from './comments-data/comments-data';
 import { loadMyList } from './favorite-films-data/favorite-films-data';
 import { requireAuthorization } from './user-process/user-process';
 import { redirectToRoute } from './action';
-import { loadFilmFull } from './film-full-data/film-full-data';
+import { loadFilmFull, toggleLoaderFilmFull } from './film-full-data/film-full-data';
 import { userData } from './user-data/user-data';
 import { postUserReview } from './post-comment-data/post-comment-data';
 import { reviewSendStatus } from './review-send-status/review-send-status';
-import { useNavigate } from 'react-router-dom';
 
 
 export const fetchFilmsAction = createAsyncThunk(
@@ -54,6 +53,7 @@ export const fetchSimilarAction = createAsyncThunk(
       store.dispatch(loadSimilarFilms(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(toggleLoaderSimilar(true));
     }
   },
 );
@@ -66,8 +66,7 @@ export const fetchFullFilmAction = createAsyncThunk(
       store.dispatch(loadFilmFull(data));
     } catch (error) {
       errorHandle(error);
-      const navigate = useNavigate();
-      navigate(`${APIRoute.NoFoundScreen}`);
+      store.dispatch(toggleLoaderFilmFull(true));
     }
   },
 );
@@ -80,6 +79,7 @@ export const fetchCommentsAction = createAsyncThunk(
       store.dispatch(loadComments(data));
     } catch (error) {
       errorHandle (error);
+      store.dispatch(toggleLoaderComments(true));
     }
   },
 );
